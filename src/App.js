@@ -17,7 +17,17 @@ class App extends React.Component {
 
     // start with at least ONE pokemon on screen 
     this.state = {
-      pokemonCount: 1
+      pokemonCount: 3
+    }
+  }
+
+  exampleFunction(){
+    console.log("Hello world, from button click");
+  }
+
+  decreasePokemonCount(currentCount){
+    if (currentCount > 0){
+      this.setState({pokemonCount: this.state.pokemonCount - 1});
     }
   }
 
@@ -26,7 +36,21 @@ class App extends React.Component {
       <div>
         <h1>Pokemon page</h1>
 
-        <Pokemon></Pokemon>
+        {/* <button onClick={this.exampleFunction}>Increase Pokemon count</button>
+        <button onClick={() => {console.log("Hello world from inline expression")}}>Decrease Pokemon count</button> */}
+
+        <button onClick={() => {this.setState({pokemonCount: this.state.pokemonCount + 1})}}>Increase Pokemon count</button>
+        <button onClick={() => {this.decreasePokemonCount(this.state.pokemonCount)}}>
+          Decrease Pokemon count
+        </button>
+
+        {/* <Pokemon></Pokemon> */}
+        {
+          // Array(arraySize).fill(default value).map(() => {return some JSX here})
+          Array(this.state.pokemonCount).fill(null).map(() => <Pokemon />)
+        }
+
+
       </div>
     )
   }
